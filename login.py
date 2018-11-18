@@ -3,6 +3,7 @@ from selenium import webdriver
 import datetime
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+CRNs = []
 class Semester_Registration:    
     #from selenium.webdriver.common.keys import Keys
     #from selenium.webdriver.chrome.options import Options
@@ -12,9 +13,8 @@ class Semester_Registration:
 
     chrome_executable_path = "/usr/bin/chromedriver"
     
-
+    #CRNs = [] #Array of course numbers
     def get_classes(self):
-        CRNs = [] #Array of Course Registration Numbers
         print("Enter the Course Registration Numbers, and -1 when finished")
         CRN = 0 #Initialize at arbitrary value
         while True:
@@ -50,7 +50,7 @@ class Semester_Registration:
         username = input('Enter your username: ')
         return username
 
-    def login(self, username, password):
+    def login(self, a, b):
         login_url = 'https://login.rowan.edu/cas/login?TARGET=https%3A%2F%2Fbanner9.rowan.edu%2FStudentRegistrationSsb%2Fj_spring_cas_security_check'
         options=webdriver.ChromeOptions()
         options.add_argument('--no-sandbox')
@@ -59,5 +59,9 @@ class Semester_Registration:
         browser = webdriver.Chrome(executable_path='/usr/bin/chromedriver', chrome_options=options)
         browser.get(login_url)
         print("Logging in...")
-        browser.find_element_by_name('username').send_keys(username)
-        browser.find_element_by_name('password').send_keys(password, Keys.RETURN)
+        browser.find_element_by_name('username').send_keys(a)
+        browser.find_element_by_name('password').send_keys(b, Keys.RETURN)
+        browser.find_element_by_xpath('//*[@id="registerLink"]')
+
+    def register():
+        

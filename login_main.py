@@ -6,4 +6,4 @@ if __name__ in '__main__':
     username = student.get_username()
     password = student.get_password()
     student.login(username, password)
-    input("Press enter when ready.")
+    intpu('') #pauses before closing the program
