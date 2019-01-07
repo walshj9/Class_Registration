@@ -3,14 +3,13 @@ from selenium import webdriver
 import datetime
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 CRNs = []
 class Semester_Registration:    
-    #from selenium.webdriver.common.keys import Keys
-    #from selenium.webdriver.chrome.options import Options
-    #from selenium.webdriver.common.action_chains import ActionChains
-    #import datetime
-    #import time
-
+    
     chrome_executable_path = "/usr/bin/chromedriver"
     
     #CRNs = [] #Array of course numbers
@@ -42,9 +41,11 @@ class Semester_Registration:
         return password1
 
     def get_login_date(self):
-        print("What's the month and date of registration?")
-        month = int(input("Month (1-12): "))
-        date = int(input("Date: "))
+        print("What's the date of registration?")
+        date = input("Date(MM/DD): ")
+        day, month = date.split("/", 1)
+        return (day, month)
+
 
     def get_username(self):
         username = input('Enter your username: ')
@@ -61,7 +62,7 @@ class Semester_Registration:
         print("Logging in...")
         browser.find_element_by_name('username').send_keys(a)
         browser.find_element_by_name('password').send_keys(b, Keys.RETURN)
-        browser.find_element_by_xpath('//*[@id="registerLink"]')
-
-    def register():
+        wait = WebDriverWait(browser, 10) #sets wait time for 10 seconds
+        wait.until(EC.element_to_be_clickable((By.ID, 'registerLink'))) #waits for link to become visible
+        browser.find_element_by_xpath("//a[@id='registerLink']").click()
         
